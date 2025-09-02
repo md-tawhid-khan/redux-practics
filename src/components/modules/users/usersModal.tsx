@@ -1,20 +1,30 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogFooter,DialogTrigger } from "@/components/ui/dialog"
 import {  Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
+
 import { addUser } from "@/redux/features/users/usersSlice"
 
 import { useAppDispatch } from "@/redux/hook"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 
 const UsersModal=()=>{
-    const form=useForm()
+
+  type TAddFieldValues={
+    userName:string ;
+    id:string ;
+  }
+
+  const [open,setOpen]=useState(false)
+
+    const form=useForm<TAddFieldValues>()
 
     const dispatch=useAppDispatch()
 
 
 
     return (<>
-         <Dialog>
+         <Dialog open={open} onOpenChange={setOpen}>
       <form >
         <DialogTrigger asChild>
           <Button >Create User</Button>
@@ -22,7 +32,11 @@ const UsersModal=()=>{
         <DialogContent className="sm:max-w-[425px]">
           
         <Form {...form}>
-            <form onSubmit={form.handleSubmit((values)=>dispatch(addUser(values)))} >
+            <form onSubmit={form.handleSubmit((values :TAddFieldValues )=>{
+              dispatch(addUser(values))
+              form.reset()
+              setOpen(false)
+              })} >
   <FormField
     control={form.control}
     name="userName"
