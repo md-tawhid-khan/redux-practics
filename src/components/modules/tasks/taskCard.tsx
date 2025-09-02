@@ -3,17 +3,20 @@ import {Checkbox} from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import type { ITask } from "@/interface/interface"
 import { cn } from "@/lib/utils"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { deleteTasks, toggleCompleteStates } from "@/redux/features/tasks/tasksSlice"
+import { selectUsers } from "@/redux/features/users/usersSlice"
 
 interface IProps{
     task:ITask
 }
 
 const TaskCard=({task}:IProps)=>{
-    const dispatch=useAppDispatch() ;
 
-    // console.log(task.priority)
+    const dispatch=useAppDispatch() ;
+    const users=useAppSelector(selectUsers)
+
+     const assignToUsers=users.find(user=>user.id===task.assignTo);
 
     return (
     <>
@@ -27,7 +30,9 @@ const TaskCard=({task}:IProps)=>{
                 }
                 )}></div>
                 <h1 className={cn({"line-through":task.isComplete})} >{task.title}</h1>                
+                               
             </div>
+            
             <div className="flex gap-3 items-center">
                     <Button onClick={()=>dispatch(deleteTasks(task.id))} variant="link" className="p-0 text-red-500">
                         <Trash2/>
@@ -35,6 +40,7 @@ const TaskCard=({task}:IProps)=>{
                          <Checkbox onClick={()=>dispatch(toggleCompleteStates(task.id))}/>
                 </div>
         </div>
+         <h1>name : {assignToUsers ? assignToUsers?.userName:"no one"}</h1> 
         <p className="mt-5">{task.description}</p>
     </div>
     </>

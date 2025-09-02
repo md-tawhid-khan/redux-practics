@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogFooter,DialogTrigger } from "@/components/ui/dialog"
 import {  Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
-import { addTask } from "@/redux/features/tasks/tasksSlice"
 import { addUser } from "@/redux/features/users/usersSlice"
 
 import { useAppDispatch } from "@/redux/hook"

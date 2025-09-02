@@ -18,6 +18,7 @@ const initialState:InitialState=
   description:"it is very helpful for developing",
   dueDate: "2025-12",
   isComplete: false,
+  assignTo:'',
   priority: "High"}
  ],
 
@@ -25,7 +26,7 @@ const initialState:InitialState=
 
 }
 
-    type DraftTasks =Pick<ITask,'title'|'description'|'dueDate'|'priority'>
+    type DraftTasks =Pick<ITask,'title'|'description'|'dueDate'|'priority'|'assignTo'>
 
     const createTasks=(addTask:DraftTasks):ITask=>{
  return {id:nanoid(),isComplete:false,...addTask}

@@ -9,7 +9,7 @@ const Users=()=>{
     
     return (<>
     <div className="flex justify-end items-center">
-     <h1 className="mr-auto">this is user page</h1>
+     
       <UsersModal/>
       
     </div>
